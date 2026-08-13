@@ -15,3 +15,26 @@ print("Naive Bayes score:",gnb.score(X_test,y_test))
 
 
 # Naive Bayes algorithm using custom dataset using excel sheet
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score, precision_score, f1_score
+data = pd.read_excel('food_naivebayes_dataset.xlsx')
+print("Dataset Loaded Successfully:\n")
+print(data)
+X = data[['Feature1', 'Feature2']]
+y = data['Class']
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+gnb = GaussianNB()
+gnb.fit(x_train, y_train)
+y_pred = gnb.predict(x_test)
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred, average='macro', zero_division=1)
+f1 = f1_score(y_test, y_pred, average='macro', zero_division=1)
+print("\nModel Evaluation Metrics:")
+print("Accuracy:", round(accuracy, 2))
+print("Precision:", round(precision, 2))
+print("F1-Score:", round(f1, 2))
+x_new = pd.DataFrame([[6, 4]], columns=['Feature1', 'Feature2'])
+y_new = gnb.predict(x_new)
+print("\nPredicted class for [6, 4] (Tomato):", y_new[0])
