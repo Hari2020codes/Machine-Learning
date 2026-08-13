@@ -1,3 +1,5 @@
+# Naive Bayes algorithm using public domain dataset
+
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
@@ -10,3 +12,6 @@ x_new=[[5,5,4,4]]
 y_new=gnb.fit(X_train,y_train).predict(x_new)
 print("predicted output for [[5,5,4,4]]:",y_new)
 print("Naive Bayes score:",gnb.score(X_test,y_test))
+
+
+# Naive Bayes algorithm using custom dataset using excel sheet
