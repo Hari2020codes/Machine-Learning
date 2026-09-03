@@ -21,18 +21,12 @@ print(y_pred)
 
 output
 ===========
-Feature1 Feature2	        Class
-10	     9	             Fruit
-1	       4	               Protein
-10	     1	             Fruit
-7	       10	             Vegetable
-3	       10	             Vegetable
-1	       1	               Protein
-8	       5	               Fruit
-3	       7	               Vegetable
-3	       6	               Protein
-7	       3	               Fruit
-6	       4	               Fruit
+x1	y1
+95	85
+85	95
+80	70
+70	65
+60	70
 
 [[101.84210526]
  [ 85.65789474]]
