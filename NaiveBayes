@@ -1,3 +1,6 @@
+Program 5
+-----------------
+
 # Naive Bayes algorithm using public domain dataset
 
 from sklearn.datasets import load_iris
@@ -13,8 +16,10 @@ y_new=gnb.fit(X_train,y_train).predict(x_new)
 print("predicted output for [[5,5,4,4]]:",y_new)
 print("Naive Bayes score:",gnb.score(X_test,y_test))
 
-
+Program 6
+-----------------
 # Naive Bayes algorithm using custom dataset using excel sheet
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
@@ -38,3 +43,66 @@ print("F1-Score:", round(f1, 2))
 x_new = pd.DataFrame([[6, 4]], columns=['Feature1', 'Feature2'])
 y_new = gnb.predict(x_new)
 print("\nPredicted class for [6, 4] (Tomato):", y_new[0])
+
+
+or
+
+#using dataset within program
+
+#Naive bayes algorithm using dataset within program 
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score, precision_score, f1_score
+
+# Simulate the dataset since the file was not found
+data = pd.DataFrame({
+    'Feature1': [5, 6, 7, 8, 5, 6, 7, 8, 5, 6],
+    'Feature2': [3, 4, 3, 4, 3, 4, 3, 4, 3, 4],
+    'Class':    ['Apple', 'Apple', 'Orange', 'Orange', 'Apple', 'Apple', 'Orange', 'Orange', 'Apple', 'Apple']
+})
+print("Dataset Loaded Successfully (Simulated):")
+print(data)
+
+X = data[['Feature1', 'Feature2']]
+y = data['Class']
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+gnb = GaussianNB()
+gnb.fit(x_train, y_train)
+y_pred = gnb.predict(x_test)
+
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred, average='macro', zero_division=1)
+f1 = f1_score(y_test, y_pred, average='macro', zero_division=1)
+
+print("\nModel Evaluation Metrics:")
+print("Accuracy:", round(accuracy, 2))
+print("Precision:", round(precision, 2))
+print("F1-Score:", round(f1, 2))
+
+x_new = pd.DataFrame([[6, 4]], columns=['Feature1', 'Feature2'])
+y_new = gnb.predict(x_new)
+print("\nPredicted class for [6, 4] (Tomato):", y_new[0])
+
+output
+==========
+Dataset Loaded Successfully (Simulated):
+   Feature1  Feature2   Class
+0         5         3   Apple
+1         6         4   Apple
+2         7         3  Orange
+3         8         4  Orange
+4         5         3   Apple
+5         6         4   Apple
+6         7         3  Orange
+7         8         4  Orange
+8         5         3   Apple
+9         6         4   Apple
+
+Model Evaluation Metrics:
+Accuracy: 1.0
+Precision: 1.0
+F1-Score: 1.0
+
+Predicted class for [6, 4] (Tomato): Apple
