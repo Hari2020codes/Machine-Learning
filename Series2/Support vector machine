@@ -1,0 +1,26 @@
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
+from sklearn import svm
+
+# Load breast cancer dataset
+cancer = datasets.load_breast_cancer()
+
+# Split dataset into training and testing sets
+x_train, x_test, y_train, y_test = train_test_split(
+    cancer.data, cancer.target, test_size=0.3, random_state=109
+)
+
+# Initialize and train Support Vector Classifier with linear kernel
+clf = svm.SVC(kernel='linear')
+clf.fit(x_train, y_train)
+
+# Predict test values
+y_pred = clf.predict(x_test)
+
+# Print metrics
+print("Actual values:", y_test)
+print("Predicted values:", y_pred)
+print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
+print("Precision:", metrics.precision_score(y_test, y_pred))
+print("Recall:", metrics.recall_score(y_test, y_pred))
