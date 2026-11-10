@@ -1,0 +1,31 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from sklearn.datasets import load_iris
+
+# Load Iris dataset and select petal length & width features
+iris = load_iris()
+X = iris.data[:, [2, 3]]
+df = pd.DataFrame(X, columns=['Petal Length', 'Petal Width'])
+
+# Configure and fit K-Means model for 3 clusters
+kmeans = KMeans(n_clusters=3, init='k-means++', random_state=42)
+y_kmeans = kmeans.fit_predict(X)
+
+# Plot clusters and centroids
+plt.figure(figsize=(8, 6))
+plt.scatter(X[y_kmeans == 0, 0], X[y_kmeans == 0, 1], s=100, c='red', label='Cluster 1')
+plt.scatter(X[y_kmeans == 1, 0], X[y_kmeans == 1, 1], s=100, c='blue', label='Cluster 2')
+plt.scatter(X[y_kmeans == 2, 0], X[y_kmeans == 2, 1], s=100, c='green', label='Cluster 3')
+plt.scatter(
+    kmeans.cluster_centers_[:, 0], 
+    kmeans.cluster_centers_[:, 1], 
+    s=300, c='yellow', marker='*', label='Centroids'
+)
+plt.title('K-Means Clustering on Iris Dataset')
+plt.xlabel('Petal Length (cm)')
+plt.ylabel('Petal Width (cm)')
+plt.legend()
+plt.grid(True)
+plt.show()
