@@ -1,0 +1,25 @@
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_iris
+
+# Load the Iris dataset
+irisdata = load_iris()
+print(irisdata.data)
+
+X = irisdata.data
+y = irisdata.target
+
+# Split dataset into training and testing sets
+x_train, x_test, y_train, y_test = train_test_split(X, y)
+
+# Initialize and train KNN classifier with k=1
+knn = KNeighborsClassifier(n_neighbors=1)
+knn.fit(x_train, y_train)
+
+print(x_test)
+print(knn.predict(x_test))
+print(y_test)
+
+# Predict class for a new custom sample
+result = knn.predict([[2, 4, 6, 2]])
+print(irisdata.target_names[result])
